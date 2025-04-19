@@ -17,7 +17,7 @@ def intstr(myint):
 
 if (len(sys.argv) <= 1):
     print("Available syntax:")
-    print("\tall                            | lists all available commands and their variations extensively")
+    print("\tall                                | lists all available commands and their variations extensively")
     print("\tdivinity bake                      | Analyzes assets and bakes them into \"src/assets/pack.h\" accordingly")
     print("\tdivinity new <type>                | Creates a new integration into the project, such as a level or an asset")
     exit()
