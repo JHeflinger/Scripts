@@ -1,3 +1,8 @@
+"""
+author: Jason Heflinger
+description: cleans the scripting cache
+"""
+
 import os
 import shutil
 

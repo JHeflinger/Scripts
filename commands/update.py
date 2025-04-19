@@ -1,3 +1,8 @@
+"""
+author: Jason Heflinger
+description: updates shell.py
+"""
+
 import urllib.request
 
 if __name__ == "__main__":

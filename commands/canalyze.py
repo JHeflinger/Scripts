@@ -1,3 +1,8 @@
+"""
+author: Jason Heflinger
+description: given a directory to analyze, performs basic analytics on C and C++ codebases
+"""
+
 import os
 import re
 import sys

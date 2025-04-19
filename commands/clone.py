@@ -1,3 +1,8 @@
+"""
+author: Jason Heflinger
+description: clones shell.py into the current working directory
+"""
+
 import urllib.request
 
 if __name__ == "__main__":
