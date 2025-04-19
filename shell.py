@@ -5,7 +5,7 @@ description: Runs a customized shell program to grow and download custom command
 """
 
 import os
-
+import urllib.request
 last_modified = "5/19/2025"
 
 def gstr(str):
@@ -16,6 +16,13 @@ def sysprompt():
     print("Developed on Python 3.10")
     print(f"Last modified on {gstr(last_modified)}")
     print("Enter command \"help\" for usage details")
+
+def download(command):
+    try:
+        urllib.request.urlretrieve(f"https://raw.githubusercontent.com/JHeflinger/Scripts/refs/heads/main/commands/{command}.py", f".scache/{command}.py")
+    except:
+        return False
+    return True
 
 def initcache():
     if os.path.isdir(".scache"):
@@ -53,6 +60,24 @@ def trycommand(script):
     if (not initcache()):
         print("Unable to find custom command in script cache.")
         return False
+    if (os.path.isfile(f".scache/{script}.py")):
+        return True
+    print("Command was not found on disk. Would you like to attempt to download it? (y/n)")
+    response = ""
+    while True:
+        response = input("> ")
+        if (response.lower() == "y" or response.lower() == "n"):
+            response = response.lower()
+            break
+        else:
+            print(f"Invalid response \"{response}\" detected. Please enter either \"y\" or \"n\".")
+    if (response == "y"):
+        if download(script):
+            print("Successfully downloaded command!")
+            return True
+        print("Unable to download command. Make sure you are connected to internet and that the command exists.")
+        return False
+    print("Unable to run command.")
     return False
 
 def shell():
