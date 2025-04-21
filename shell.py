@@ -6,7 +6,7 @@ description: Runs a customized shell program to grow and download custom command
 
 import os
 import urllib.request
-last_modified = "5/19/2025"
+last_modified = "4/21/2025"
 
 def gstr(str):
     return "\033[32m" + str + "\033[0m"
