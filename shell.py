@@ -7,12 +7,13 @@ description: Runs a customized shell program to grow and download custom command
 import os
 import urllib.request
 last_modified = "4/21/2025"
+version = "version 1.0"
 
 def gstr(str):
     return "\033[32m" + str + "\033[0m"
 
 def sysprompt():
-    print(f"Ultrashell {gstr("version 1.0")} authored by Jason Heflinger (https://github.com/JHeflinger)")
+    print(f"Ultrashell {gstr(version)} authored by Jason Heflinger (https://github.com/JHeflinger)")
     print("Developed on Python 3.10")
     print(f"Last modified on {gstr(last_modified)}")
     print("Enter command \"help\" for usage details")
