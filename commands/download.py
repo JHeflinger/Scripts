@@ -4,6 +4,7 @@ description: Downloads a command
 """
 
 import sys
+import urllib.request
 
 if len(sys.argv) != 2:
     print("Please provide a command to download")
