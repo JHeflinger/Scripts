@@ -94,17 +94,17 @@ def shell():
             os.system(cmd)
         elif (topcmd == "build" or topcmd == "b"):
             if (os.name == "nt"):
-                os.system("./build.bat " + argstr)
+                os.system("build.bat " + argstr)
             else:
                 os.system("./build.sh" + argstr)
         elif (topcmd == "run" or topcmd == "r"):
             if (os.name == "nt"):
-                os.system("./run.bat " + argstr)
+                os.system("run.bat " + argstr)
             else:
                 os.system("./run.sh" + argstr)
         elif (topcmd == "clean" or topcmd == "c"):
             if (os.name == "nt"):
-                os.system("./clean.bat " + argstr)
+                os.system("clean.bat " + argstr)
             else:
                 os.system("./clean.sh" + argstr)
         elif (cmd == "exit" or cmd == "quit" or cmd == "q" or cmd == "e"):
