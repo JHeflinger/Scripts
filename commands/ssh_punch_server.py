@@ -1,3 +1,3 @@
 import os
 
-os.system("ssh -i D:\\Keys\\cloud.key ocs@170.9.247.131")
+os.system("ssh -i D:\\Keys\\cloud.key opc@170.9.247.131")
