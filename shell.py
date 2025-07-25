@@ -7,7 +7,7 @@ import sys
 import os
 import urllib.request
 last_modified = "4/21/2025"
-version = "version 1.0"
+version = "version 1.0.1"
 
 def gstr(str):
     return "\033[32m" + str + "\033[0m"
