@@ -3,7 +3,7 @@ author: Jason Heflinger
 description: Runs a customized shell program to grow and download custom commands from
              a custom scripts repository.
 """
-
+import sys
 import os
 import urllib.request
 last_modified = "4/21/2025"
@@ -18,9 +18,30 @@ def sysprompt():
     print(f"Last modified on {gstr(last_modified)}")
     print("Enter command \"help\" for usage details")
 
+def printhelp():
+    print(f"\nWelcome to \033[32mULTRASHELL\033[0m, an ultimate and versatile dev tool!\n")
+    print("This program exists to simplify, condense, and scale existing build tools and scripts across projects!")
+    print("When in the shell, you will be able to download scripts and dynamically set up dev tools!")
+    print("\nBy default, the script database is set up to be my own personal script database.")
+    print("If you'd like to use your own, then you can pass in a web hosted directory link via the first argument of the shell.")
+    print("\nUsage:\n\tshell.py <url>")
+    print("\nIf you're using ultrashell via the installer, then edit DB.txt file from the installation directory.")
+    print("\nBy default, ultrashell is shipped with the following default commands:\n")
+    print("\tgit <args...> | All git functions (requires git to be installed)")
+    print("\tclear         | Clears the console")
+    print("\tquit          | Exits ultrashell")
+    print("\thelp          | Displays this message")
+    print("\trun           | Attempts to run a run.sh or run.bat script (Depending on OS)")
+    print("\tbuild         | Attempts to run a build.sh or build.bat script (Depending on OS)")
+    print("\tclean         | Attempts to run a clean.sh or clean.bat script (Depending on OS)")
+    print("\nIf you don't have a given command downloaded, then try it anyway and follow the prompts to download it into your script cache!")
+
 def download(command):
+    staticlink = "https://raw.githubusercontent.com/JHeflinger/Scripts/refs/heads/main/commands"
+    if len(sys.argv) > 1:
+        staticlink = sys.argv[1]
     try:
-        urllib.request.urlretrieve(f"https://raw.githubusercontent.com/JHeflinger/Scripts/refs/heads/main/commands/{command}.py", f".scache/{command}.py")
+        urllib.request.urlretrieve(f"{staticlink}/{command}.py", f".scache/{command}.py")
     except:
         return False
     return True
@@ -92,6 +113,8 @@ def shell():
             argstr = cmd[argind:]
         if (topcmd == "git" or topcmd == "g" or topcmd == "clear"):
             os.system(cmd)
+        elif (topcmd == "help" or topcmd == "h"):
+            printhelp()
         elif (topcmd == "build" or topcmd == "b"):
             if (os.name == "nt"):
                 os.system("build.bat " + argstr)
