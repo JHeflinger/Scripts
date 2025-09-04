@@ -54,7 +54,7 @@ if %ERRORLEVEL% NEQ 0 (
     with open("clean.bat", "w") as f:
         f.write("""@echo off
 if exist \"build/jason_custom_build\" (
-    rmdir /s /q \"build\jason_custom_build\"
+    rmdir /s /q \"build/jason_custom_build\"
 )""")
     with open("build.sh", "w") as f:
         f.write("""# ensure build folder exists
