@@ -86,7 +86,7 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 ./build/jason_custom_build/""")
-        f.write(f"{default_exe_name}.exe")
+        f.write(f"{default_exe_name}")
     with open("clean.sh", "w") as f:
         f.write("""if [ -d \"build/jason_custom_build\" ]; then
     cd build
