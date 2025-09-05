@@ -12,25 +12,19 @@ try:
         f.write("""@echo off
 setlocal enabledelayedexpansion
 
-set BUILD_DIR=jason_custom_build
-
 :: ensure build folder exists
 if NOT exist \"build\" (
-    mkdir build
-)
-
-:: ensure subbuild folder exists
-if NOT exist \"build/%BUILD_DIR%\" (
-    cd build
-    mkdir %BUILD_DIR%
-    cd %BUILD_DIR%
-    cmake ../..
-    cd ..
-    cd ..
+    echo \"Need to initialize in QT Creator\"
+    exit /b 1
 )
 
 :: build
-cd \"build/%BUILD_DIR%\"
+cd \"build\"
+for /d %%D in (*) do (
+    cd \"%%D\"
+    goto :done
+)
+:done
 cmake --build .
 cd ..
 cd ..
@@ -49,31 +43,30 @@ call build.bat
 if %ERRORLEVEL% NEQ 0 (
     exit /b %ERRORLEVEL%
 )
-\"build/jason_custom_build/Debug/""")
+cd \"build\"
+set QTDIR=
+for /d %%D in (*) do (
+    set QTDIR=%%D
+    goto :done
+)
+:done
+cd ..
+\"build/%QTDIR%/""")
         f.write(f"{default_exe_name}.exe\"")
     with open("clean.bat", "w") as f:
         f.write("""@echo off
-if exist \"build/jason_custom_build\" (
-    rmdir /s /q \"build/jason_custom_build\"
+if exist \"build\" (
+    rmdir /s /q \"build\"
 )""")
     with open("build.sh", "w") as f:
         f.write("""# ensure build folder exists
 if [ ! -d \"build\" ]; then
-	mkdir \"build\"
-fi
-
-# ensure subbuild folder exists
-if [ ! -d \"build/jason_custom_build\" ]; then
-    cd build
-	mkdir \"jason_custom_build\"
-    cd jason_custom_build
-	cmake ../..
-	cd ..
-    cd ..
+	echo \"Need to initialize in QT Creator\"
+	exit 1
 fi
 
 # build
-cd build/jason_custom_build
+cd build/Desktop-Debug
 cmake --build .
 cd ..
 cd ..
@@ -85,13 +78,11 @@ fi""")
 if [ $? -ne 0 ]; then
 	exit 1
 fi
-./build/jason_custom_build/""")
+./build/Desktop-Debug/""")
         f.write(f"{default_exe_name}")
     with open("clean.sh", "w") as f:
-        f.write("""if [ -d \"build/jason_custom_build\" ]; then
-    cd build
-	rm -rf jason_custom_build
-    cd ..
+        f.write("""if [ -d \"build\" ]; then
+	rm -rf build
 fi
 """)
     if (os.name != "nt"):
